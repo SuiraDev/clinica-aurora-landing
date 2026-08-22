@@ -1,0 +1,16 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "no-inline-style": "error",
+    "require-sri": "off",
+    "long-title": "off",
+    "no-void-style": ["off"],
+    "prefer-native-element": "off",
+    "no-implicit-button-type": "error",
+    "heading-level": "error",
+    "wcag/h30": "error",
+    "wcag/h32": "error",
+    "wcag/h37": "error",
+    "tel-non-breaking": ["error", { "ignoreClasses": ["btn"] }]
+  }
+}
