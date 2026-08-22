@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=4">
+  <link rel="stylesheet" href="assets/css/styles.css?v=6">
 </head>
 <body>
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
@@ -192,26 +192,26 @@
           <h2 id="faq-title">Tudo o que você precisa saber.</h2>
         </div>
         <div class="faq-list">
-          <details class="faq">
-            <summary><h3>A avaliação é paga?</h3></summary>
-            <p>A primeira avaliação é gratuita e sem compromisso. Nela entendemos seu caso e sugerimos o melhor caminho.</p>
-          </details>
-          <details class="faq">
-            <summary><h3>Preciso de algum preparo antes de um procedimento?</h3></summary>
-            <p>Depende do procedimento. Em geral, evitamos exposição solar recente e o uso de alguns produtos; orientamos tudo na avaliação.</p>
-          </details>
-          <details class="faq">
-            <summary><h3>Os resultados são permanentes?</h3></summary>
-            <p>Variam por procedimento. Alguns têm efeito prolongado e outros exigem manutenção — explicamos os detalhes de cada caso.</p>
-          </details>
-          <details class="faq">
-            <summary><h3>Quais formas de pagamento vocês aceitam?</h3></summary>
-            <p>Aceitamos débito, crédito e Pix. Parcelamentos são combinados na avaliação, sempre com transparência.</p>
-          </details>
-          <details class="faq">
-            <summary><h3>Posso agendar pelo WhatsApp?</h3></summary>
-            <p>Sim. Use o botão de WhatsApp ou o formulário aqui da página e nossa equipe responderá em horário comercial.</p>
-          </details>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a1"><span class="faq-q-text">A avaliação é paga?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" id="faq-a1" hidden><p>A primeira avaliação é gratuita e sem compromisso. Nela entendemos seu caso e sugerimos o melhor caminho.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a2"><span class="faq-q-text">Preciso de algum preparo antes de um procedimento?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" id="faq-a2" hidden><p>Depende do procedimento. Em geral, evitamos exposição solar recente e o uso de alguns produtos; orientamos tudo na avaliação.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a3"><span class="faq-q-text">Os resultados são permanentes?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" id="faq-a3" hidden><p>Variam por procedimento. Alguns têm efeito prolongado e outros exigem manutenção — explicamos os detalhes de cada caso.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a4"><span class="faq-q-text">Quais formas de pagamento vocês aceitam?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" id="faq-a4" hidden><p>Aceitamos débito, crédito e Pix. Parcelamentos são combinados na avaliação, sempre com transparência.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a5"><span class="faq-q-text">Posso agendar pelo WhatsApp?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" id="faq-a5" hidden><p>Sim. Use o botão de WhatsApp ou o formulário aqui da página e nossa equipe responderá em horário comercial.</p></div>
+          </div>
         </div>
       </div>
     </section>
@@ -315,6 +315,6 @@
     </div>
   </div>
 
-  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/main.js?v=1"></script>
 </body>
 </html>

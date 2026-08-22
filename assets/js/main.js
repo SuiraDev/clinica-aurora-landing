@@ -175,3 +175,15 @@ document.querySelectorAll('img').forEach((img) => {
     img.style.opacity = '0';
   });
 });
+
+/* FAQ accordion (botao + painel) */
+document.querySelectorAll('.faq-q').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const panel = item.querySelector('.faq-a');
+    const open = item.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) panel.removeAttribute('hidden');
+    else panel.setAttribute('hidden', '');
+  });
+});
