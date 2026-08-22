@@ -1,7 +1,7 @@
 /* ==========================================================================
    Clínica Aurora — main.js (ES module, CSP-safe: no inline script, no eval)
-   Handles: mobile nav, theme toggle, accent swatches, motion toggle, tweaks
-   panel, demo form, and graceful image fallback.
+   Handles: mobile nav (focus trap), theme toggle, accent swatches (theme-aware),
+   motion toggle, appearance panel (inert when closed), demo form, image fallback.
    ========================================================================== */
 
 const root = document.documentElement;
@@ -14,43 +14,30 @@ function read(key) {
   try { return localStorage.getItem(key); } catch { return null; }
 }
 
-/* ---------- Accent (color swatches) ---------- */
-function shade(hex, pct) {
-  const n = parseInt(hex.slice(1), 16);
-  let r = (n >> 16) & 255;
-  let g = (n >> 8) & 255;
-  let b = n & 255;
-  const f = (v) =>
-    Math.max(0, Math.min(255, Math.round(v + (pct / 100) * 255)));
-  return (
-    '#' +
-    [f(r), f(g), f(b)]
-      .map((v) => v.toString(16).padStart(2, '0'))
-      .join('')
-  );
-}
+/* ---------- Accent (theme-aware, fixes D1) ----------
+   The palette is defined in CSS keyed on `data-accent`; here we only switch the
+   attribute, and CSS recomputes --accent / --accent-deep / --on-accent together
+   per theme so every text pair stays ≥ 4.5:1. No inline style overrides. */
+const accentNames = ['terracota', 'salvia', 'vinho', 'petroleo'];
 
-function setAccent(hex) {
-  root.style.setProperty('--accent', hex);
-  root.style.setProperty('--accent-ink', shade(hex, -18));
+function setAccent(name) {
+  if (!accentNames.includes(name)) return;
+  root.setAttribute('data-accent', name);
   document.querySelectorAll('#swatches .swatch').forEach((sw) => {
-    sw.classList.toggle('active', sw.dataset.accent.toLowerCase() === hex.toLowerCase());
+    const active = sw.dataset.accent === name;
+    sw.classList.toggle('active', active);
+    sw.setAttribute('aria-pressed', String(active));
   });
+  store('accent', name);
 }
 
 const swatchButtons = document.querySelectorAll('#swatches .swatch');
-const savedAccent = read('accent');
+const savedAccent = read('accent') || 'terracota';
 swatchButtons.forEach((btn) => {
-  const hex = btn.dataset.accent;
-  if (hex.toLowerCase() === (savedAccent || '#A85B4B').toLowerCase()) {
-    btn.classList.add('active');
-  }
-  btn.addEventListener('click', () => {
-    setAccent(hex);
-    store('accent', hex);
-  });
+  btn.setAttribute('aria-pressed', 'false');
+  btn.addEventListener('click', () => setAccent(btn.dataset.accent));
 });
-if (savedAccent) setAccent(savedAccent);
+setAccent(savedAccent);
 
 /* ---------- Theme ---------- */
 const themeButtons = document.querySelectorAll('#themeToggle button');
@@ -87,13 +74,23 @@ if (savedMotion === null && window.matchMedia('(prefers-reduced-motion: reduce)'
   applyMotion(false);
 }
 
-/* ---------- Tweaks panel ---------- */
+/* ---------- Appearance panel (inert when closed, fixes D2) ---------- */
 const tweaksPanel = document.getElementById('tweaksPanel');
 const tweaksBtn = document.getElementById('tweaksBtn');
 function togglePanel(open) {
   tweaksPanel.classList.toggle('open', open);
+  // inert removes the closed panel from the tab order AND the accessibility tree.
+  if (open) {
+    tweaksPanel.removeAttribute('inert');
+    tweaksPanel.removeAttribute('aria-hidden');
+  } else {
+    tweaksPanel.setAttribute('inert', '');
+    tweaksPanel.setAttribute('aria-hidden', 'true');
+  }
   tweaksBtn.setAttribute('aria-expanded', String(open));
 }
+tweaksPanel.setAttribute('inert', '');
+tweaksPanel.setAttribute('aria-hidden', 'true');
 tweaksBtn.addEventListener('click', () => {
   togglePanel(!tweaksPanel.classList.contains('open'));
 });
@@ -104,19 +101,62 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* ---------- Mobile nav ---------- */
+/* ---------- Mobile nav (focus trap, fixes AC-A11Y-2) ---------- */
 const navLinks = document.getElementById('navLinks');
 const navToggle = document.getElementById('navToggle');
+function focusable(el) {
+  return (
+    el.getAttribute('href') != null
+    || el.getAttribute('tabindex') != null
+    || ['AUDIO', 'BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName)
+  );
+}
+function trapFocus(e, container) {
+  const els = [...container.querySelectorAll('a[href], button, input, [tabindex]:not([tabindex="-1"])')]
+    .filter((el) => !el.disabled && focusable(el));
+  if (!els.length) return;
+  const first = els[0];
+  const last = els[els.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
 function setNavOpen(open) {
   navLinks.classList.toggle('open', open);
   navToggle.setAttribute('aria-expanded', String(open));
   navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  if (open) {
+    const first = navLinks.querySelector('a');
+    if (first) first.focus();
+  }
 }
 navToggle.addEventListener('click', () => {
-  setNavOpen(!navLinks.classList.contains('open'));
+  const open = !navLinks.classList.contains('open');
+  setNavOpen(open);
 });
 navLinks.addEventListener('click', (e) => {
   if (e.target.closest('a')) setNavOpen(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+    setNavOpen(false);
+    navToggle.focus();
+  } else if (e.key === 'Tab' && navLinks.classList.contains('open')) {
+    trapFocus(e, navLinks);
+  }
+});
+document.addEventListener('click', (e) => {
+  if (
+    navLinks.classList.contains('open')
+    && !navToggle.contains(e.target)
+    && !navLinks.contains(e.target)
+  ) {
+    setNavOpen(false);
+  }
 });
 
 /* ---------- Demo form (client-side only, no backend) ---------- */
@@ -124,14 +164,14 @@ const demoForm = document.getElementById('demoForm');
 const formStatus = document.getElementById('formStatus');
 demoForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  formStatus.hidden = false;
+  formStatus.hidden = false;   // role="status" live region announces it (fixes D3)
   demoForm.reset();
 });
 
 /* ---------- Graceful image fallback ---------- */
 document.querySelectorAll('img').forEach((img) => {
   img.addEventListener('error', () => {
-    // Hide the broken <img> so the tint frame + badge remain polished.
+    // Hide the broken <img> so the tint frame remains polished.
     img.style.opacity = '0';
   });
 });

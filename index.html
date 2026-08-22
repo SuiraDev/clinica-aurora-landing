@@ -8,8 +8,8 @@
   <title>Clínica Aurora — Estética Avançada</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
@@ -27,37 +27,35 @@
         <a href="#agendar">Agendar</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-primary" href="#agendar">Agendar avaliação</a>
+        <a class="btn btn-primary nav-cta" href="#agendar">Agendar avaliação</a>
         <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false">☰</button>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- ======= HERO ======= -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="wrap">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow">Estética avançada</span>
-            <h1 id="hero-title">Onde ciência e cuidado elevam a sua beleza natural.</h1>
-            <p class="lead">Tratamentos estéticos personalizados, seguros e com resultados reais — conduzidos por profissionais certificados em um ambiente pensado para você.</p>
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="#agendar">Agendar avaliação</a>
-              <a class="btn btn-ghost" href="#tratamentos">Conhecer tratamentos</a>
-            </div>
+    <!-- ======= HERO (dawn asymmetry) ======= -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Estética avançada</span>
+          <h1 id="hero-title">Onde ciência e cuidado elevam a sua beleza natural.</h1>
+          <p class="lead">Tratamentos estéticos personalizados, seguros e com resultados reais — conduzidos por profissionais certificados em um ambiente pensado para você.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#agendar">Agendar avaliação</a>
+            <a class="btn btn-ghost" href="#tratamentos">Conhecer tratamentos</a>
           </div>
-          <div class="hero-figure">
-            <div class="frame">
-              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=80" alt="Atendimento estético na Clínica Aurora" loading="eager">
-            </div>
-            <div class="badge"><strong>+8 anos</strong> de experiência em estética</div>
-          </div>
+          <p class="hero-cue">Avaliação inicial gratuita · Equipe certificada</p>
+        </div>
+        <div class="hero-figure">
+          <figure class="frame">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=80" alt="Atendimento estético na Clínica Aurora" loading="eager">
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- ======= TRUST ======= -->
+    <!-- ======= TRUST BAND (quiet proof) ======= -->
     <section class="trust" aria-label="Diferenciais">
       <div class="wrap trust-grid">
         <div class="trust-item">
@@ -83,14 +81,15 @@
         </div>
       </div>
     </section>
-    <!-- ======= SERVICES ======= -->
+
+    <!-- ======= TRATAMENTOS (the index) ======= -->
     <section class="services" id="tratamentos" aria-labelledby="tratamentos-title">
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Nossos procedimentos</span>
           <h2 id="tratamentos-title">Tratamentos que respeitam a sua pele e o seu tempo.</h2>
         </div>
-        <ul class="service-list">
+        <ol class="service-list">
           <li>
             <span class="num" aria-hidden="true">01</span>
             <h3>Limpeza de pele</h3>
@@ -111,11 +110,11 @@
             <h3>Skincare personalizado</h3>
             <p>Um plano de cuidado com produtos adequados à sua pele, sugerido por nossa equipe.</p>
           </li>
-        </ul>
+        </ol>
       </div>
     </section>
 
-    <!-- ======= COMO FUNCIONA ======= -->
+    <!-- ======= COMO FUNCIONA (the route) ======= -->
     <section class="como-funciona" id="como-funciona" aria-labelledby="como-funciona-title">
       <div class="wrap">
         <div class="section-head">
@@ -147,7 +146,8 @@
         </ol>
       </div>
     </section>
-    <!-- ======= DEPOIMENTOS ======= -->
+
+    <!-- ======= DEPOIMENTOS (voices) ======= -->
     <section class="depoimentos" id="depoimentos" aria-labelledby="depoimentos-title">
       <div class="wrap">
         <div class="section-head">
@@ -184,7 +184,7 @@
       </div>
     </section>
 
-    <!-- ======= FAQ ======= -->
+    <!-- ======= FAQ (the conversation) ======= -->
     <section class="faq" id="faq" aria-labelledby="faq-title">
       <div class="wrap">
         <div class="section-head">
@@ -215,7 +215,8 @@
         </div>
       </div>
     </section>
-    <!-- ======= SOBRE ======= -->
+
+    <!-- ======= SOBRE (the portrait) ======= -->
     <section class="about" id="sobre" aria-labelledby="sobre-title">
       <div class="wrap">
         <div class="about-grid">
@@ -238,7 +239,7 @@
       </div>
     </section>
 
-    <!-- ======= CTA / CONTACT ======= -->
+    <!-- ======= AGENDAR (the invitation) ======= -->
     <section class="cta" id="agendar" aria-labelledby="agendar-title">
       <div class="wrap">
         <div class="cta-panel">
@@ -246,12 +247,13 @@
           <h2 id="agendar-title">Agende sua avaliação.</h2>
           <p class="lead">Conte-nos como podemos ajudar e receba um plano de cuidado pensado para você. Sem compromisso.</p>
           <div class="cta-actions">
+            <!-- PLACEHOLDER: confirmar número real da clínica (A-4). tel: e WhatsApp usam o MESMO número. -->
             <a class="btn btn-primary" href="tel:+5511999999999">Ligar agora</a>
             <a class="btn btn-ghost" href="https://wa.me/5511999999999" rel="noopener">WhatsApp</a>
           </div>
           <div class="cta-contacts">
-            <span class="row">📍 Av. Central, 100 — São Paulo/SP</span>
-            <span class="row">🕘 Ter–Sáb, 9h–19h</span>
+            <span class="row">Av. Central, 100 — São Paulo/SP</span>
+            <span class="row">Ter–Sáb, 9h–19h</span>
           </div>
 
           <!-- Formulário demonstrativo (sem backend, não persiste dados) -->
@@ -265,13 +267,14 @@
               <input id="fphone" name="fphone" type="tel" placeholder="(11) 99999-9999" autocomplete="tel" inputmode="tel" required>
             </div>
             <button class="btn btn-primary" type="submit">Enviar e receber contato</button>
-            <p class="form-status" id="formStatus" hidden>✓ Recebido! Entraremos em contato em breve.</p>
+            <p class="form-status" id="formStatus" role="status" hidden>Recebido! Entraremos em contato em breve.</p>
           </form>
         </div>
       </div>
     </section>
   </main>
-  <!-- ======= FOOTER ======= -->
+
+  <!-- ======= FOOTER (colophon) ======= -->
   <footer>
     <div class="wrap footer-grid">
       <div>
@@ -287,17 +290,17 @@
     </div>
   </footer>
 
-  <!-- ======= TWEAKS (aparencia) ======= -->
+  <!-- ======= APPEARANCE PANEL (Ajustes de aparência) ======= -->
   <button class="tweaks-btn" id="tweaksBtn" type="button" aria-label="Ajustes de aparência" aria-expanded="false" aria-controls="tweaksPanel">✎</button>
-  <div class="tweaks-panel" id="tweaksPanel">
+  <div class="tweaks-panel" id="tweaksPanel" inert aria-hidden="true">
     <h3>Ajustes de aparência</h3>
     <div class="tweaks-row">
       <span class="muted" role="group" aria-label="Cor de destaque">Cor de destaque</span>
       <div class="swatches" id="swatches">
-        <button class="swatch" type="button" data-swatch="terracota" data-accent="#A85B4B" aria-label="Cor de destaque terracota"></button>
-        <button class="swatch" type="button" data-swatch="sálvia" data-accent="#6E7D5E" aria-label="Cor de destaque sálvia"></button>
-        <button class="swatch" type="button" data-swatch="vinho" data-accent="#6E3143" aria-label="Cor de destaque vinho"></button>
-        <button class="swatch" type="button" data-swatch="petróleo" data-accent="#2E5857" aria-label="Cor de destaque petróleo"></button>
+        <button class="swatch" type="button" data-accent="terracota" aria-label="Cor de destaque terracota"></button>
+        <button class="swatch" type="button" data-accent="salvia" aria-label="Cor de destaque sálvia"></button>
+        <button class="swatch" type="button" data-accent="vinho" aria-label="Cor de destaque vinho"></button>
+        <button class="swatch" type="button" data-accent="petroleo" aria-label="Cor de destaque petróleo"></button>
       </div>
     </div>
     <div class="tweaks-row">
