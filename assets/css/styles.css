@@ -552,7 +552,6 @@ details.faq {
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius-l);
-  overflow: hidden;
   min-height: 0;
 }
 details.faq summary {
@@ -586,6 +585,8 @@ details.faq summary::after {
 }
 details.faq[open] summary::after { content: "–"; }
 details.faq p { padding: 0 1.4rem 1.2rem; color: var(--muted); }
+details.faq:not([open]) p { display: none; }
+details.faq[open] p { display: block; }
 
 /* ---------- 15. Sobre — "The portrait" (§10.7) ---------- */
 .about { padding-block: var(--space-8); }
